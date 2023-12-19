@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  coza_store_nginx:
+    image: nginx:latest
+    container_name: coza_store_nginx
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 7777:80
+  coza_store_database:
+    image: postgres:15.0-alpine
+    container_name: coza_store_database
+    ports:
+      - 7776:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      TZ: UTC
+      POSTGRES_DB: coza_store_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: JC5Ry3Sb
+  coza_store_php-fpm:
+    build:
+      context: .
+      dockerfile: docker/php-fpm/Dockerfile
+    container_name: coza_store_php-fpm
+    volumes:
+      # - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - ./laravel:/var/www/html
+      # - ./docker/cron/cron.root:/etc/cron.d/cron
+    working_dir: /var/www/html
+    stdin_open: true
+    tty: true
+volumes:
+  pgdata:
+    driver: local
