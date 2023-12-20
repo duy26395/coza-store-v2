@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-
+use Symfony\Component\HttpFoundation\AcceptHeader;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +17,7 @@ class DatabaseSeeder extends Seeder
             BannerSeeder::class,
             CategorySeeder::class,
             ProductImageSeeder::class,
-            MembersSeeder::class,
+            AccountSeeder::class,
             OrdersSeeder::class,
             OrderDetailSeeder::class,
             ProductSeeder::class,

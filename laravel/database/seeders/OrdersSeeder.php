@@ -19,7 +19,7 @@ class OrdersSeeder extends Seeder
         $now = Carbon::now();
         $orders = [
             [
-                'member_id' => 1,
+                'user_id' => 1,
                 'total_cost' => 1463000,
                 'status' => 'Wait',
                 'address' => 'HUE-HUE-HA NOI',
@@ -29,7 +29,7 @@ class OrdersSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
-                'member_id' => 1,
+                'user_id' => 1,
                 'total_cost' => 1463000,
                 'status' => 'Wait',
                 'address' => '1635743043',
@@ -39,7 +39,7 @@ class OrdersSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
-                'member_id' => 1,
+                'user_id' => 1,
                 'total_cost' => 1463000,
                 'status' => 'Wait',
                 'address' => 'HUE-HUE-HA NOI',

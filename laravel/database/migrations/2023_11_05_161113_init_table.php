@@ -51,21 +51,10 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        //migration table members
-        Schema::create('members', function (Blueprint $table) {
-            $table->id();
-            $table->string('full_name', 255)->nullable(false)->index();
-            $table->string('email', 255)->nullable(false)->unique()->index();
-            $table->string('phone_number', 255)->nullable(false)->unique()->index();
-            $table->string('password', 255)->nullable(false);
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         //migration table orders
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('member_id')->nullable(false);
+            $table->foreignId('user_id')->nullable(false);
             $table->integer('total_cost')->nullable(false);
             $table->string('status', 10)->nullable(false);
             $table->string('address', 255)->nullable(false);
@@ -132,12 +121,10 @@ return new class extends Migration
         Schema::dropIfExists('category');
         Schema::dropIfExists('discount');
         Schema::dropIfExists('img_product_detail');
-        Schema::dropIfExists('members');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('order_detail');
         Schema::dropIfExists('password_reset_temp');
         Schema::dropIfExists('products');
         Schema::dropIfExists('sliders');
-
     }
 };
