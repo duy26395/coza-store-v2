@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public static function AuthMember(): ?User
     {
-        $user = Auth::guard('users');
+        $user = Auth::guard('users')->user();
         if ($user instanceof User) {
             return $user;
         }
