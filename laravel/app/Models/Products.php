@@ -22,8 +22,9 @@ class Products extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'products';
+    const PER_PAGE = 10;
 
+    protected $table = 'products';
 
     protected $dates = [
         'created_at',

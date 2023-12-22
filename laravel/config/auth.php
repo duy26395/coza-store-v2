@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'users',
+        'guard' => 'web',
     ],
 
     /*
@@ -35,9 +35,21 @@ return [
     */
 
     'guards' => [
-        'users' => [
+        'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'member',
+        ],
+        'administrators' => [
+            'driver' => 'session',
+            'provider' => 'administrators',
         ],
     ],
 
@@ -59,6 +71,14 @@ return [
     */
 
     'providers' => [
+        'member' => [
+            'driver' => 'member_eloquent_user_provider',
+            'provider' => App\Models\User::class,
+        ],
+        'administrators' => [
+            'driver' => 'admin_eloquent_user_provider',
+            'model' => App\Models\User::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
