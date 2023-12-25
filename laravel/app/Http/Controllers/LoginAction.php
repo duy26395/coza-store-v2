@@ -13,12 +13,13 @@ class LoginAction extends Controller
     //
     public function __invoke(Request $request): ResCollection
     {
-
-        if (!Auth::guard('users')->attempt($request->only(['email', 'password']))) {
+        if (!Auth::guard('member')->attempt($request->only(['email', 'password']))) {
             throw new Exception('ahihi do ngok', 401);
         }
+    
         $request->session()->regenerate();
 
+        dd(User::AuthUser());
         return new ResCollection(User::AuthMember());
     }
 }
