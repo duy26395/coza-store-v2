@@ -110,6 +110,16 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('staffs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->smallInteger('status')->index();
+            $table->string('email');
+            $table->string('password')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -125,6 +135,7 @@ return new class extends Migration
         Schema::dropIfExists('order_detail');
         Schema::dropIfExists('password_reset_temp');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('sliders');
         Schema::dropIfExists('sliders');
     }
 };

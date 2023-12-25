@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'member',
+        'guard' => 'members',
     ],
 
     /*
@@ -35,21 +35,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'members' => [
             'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'api' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'member' => [
-            'driver' => 'session',
-            'provider' => 'member',
+            'provider' => 'members',
         ],
         'administrators' => [
             'driver' => 'session',
             'provider' => 'administrators',
+        ],
+        'staffs' => [
+            'driver' => 'session',
+            'provider' => 'staffs',
         ],
     ],
 
@@ -71,7 +67,7 @@ return [
     */
 
     'providers' => [
-        'member' => [
+        'members' => [
             'driver' => 'member_eloquent_user_provider',
             'model' => App\Models\User::class,
         ],
@@ -79,11 +75,14 @@ return [
             'driver' => 'admin_eloquent_user_provider',
             'model' => App\Models\User::class,
         ],
-        'users' => [
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
+        'staffs' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Staff::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -109,14 +108,6 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -128,7 +119,5 @@ return [
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */
-
-    'password_timeout' => 10800,
 
 ];

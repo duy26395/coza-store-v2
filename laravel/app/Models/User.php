@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Members;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -62,10 +61,24 @@ class User extends Authenticatable
 
     public static function AuthMember(): ?User
     {
-        $user = Auth::guard('users')->user();
+        $user = Auth::guard('members')->user();
         if ($user instanceof User) {
             return $user;
         }
         return null;
+    }
+
+    public static function AuthStaff(): ?Staff
+    {
+        $staff = Auth::guard('staffs')->user();
+        if ($staff instanceof Staff) {
+            return $staff;
+        }
+        return null;
+    }
+
+    public function staff(): HasOne
+    {
+        return $this->hasOne(Staff::class);
     }
 }

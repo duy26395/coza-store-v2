@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\UserProvider;
 class MemberEloquentUserProvider extends EloquentUserProvider implements UserProvider
 {
     /**
-     * validateCredentials をオーバーライドして、仮パスワードによる認証検査を行う。
+     * validateCredentials
      *
      * @param UserContract $user
      * @param array $credentials

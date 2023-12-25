@@ -29,7 +29,7 @@ Route::post('/login', App\http\Controllers\LoginAction::class);
 Route::controller('App\Http\Controllers\ProductsController')->prefix('/products')->group(function () {
     Route::get('/', 'index');
     
-    Route::middleware(['auth:administrators'])->group(function () {
+    Route::middleware(['auth:member'])->group(function () {
         Route::get('/{products}', 'show')->whereNumber('products');
         Route::post('/', 'create');
         Route::put('/{products}', 'update')->whereNumber('products');
