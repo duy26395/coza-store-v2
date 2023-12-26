@@ -25,11 +25,12 @@ Route::post('users/{id}', function ($id) {
 
 
 Route::post('/login', App\http\Controllers\LoginAction::class);
+Route::post('/logout', App\http\Controllers\LogoutAction::class);
 
 Route::controller('App\Http\Controllers\ProductsController')->prefix('/products')->group(function () {
     Route::get('/', 'index');
     
-    Route::middleware(['auth:member'])->group(function () {
+    Route::middleware(['auth:members'])->group(function () {
         Route::get('/{products}', 'show')->whereNumber('products');
         Route::post('/', 'create');
         Route::put('/{products}', 'update')->whereNumber('products');

@@ -110,16 +110,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::create('staffs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->smallInteger('status')->index();
-            $table->string('email');
-            $table->string('password')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
     }
 
     /**

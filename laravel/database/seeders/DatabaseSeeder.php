@@ -25,11 +25,5 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             SliderSeeder::class
         ]);
-        \App\Models\Staff::create([
-            'user_id' => '1',
-            'status' => Staff::STATUS_ENABLED,
-            'email' => 'staff_01@example.com',
-            'password' => Hash::make('Staff#Pass=0101'),
-        ]);
     }
 }
