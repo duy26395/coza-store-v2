@@ -39,7 +39,6 @@ class LoggingOperation
 
     private function getUserInfo(): string
     {
-        dd(123);
         $user = $this->authUser ?? User::AuthUser();
         if ($user) {
             return sprintf('%s(%d)', $user->name, $user->user_id);
@@ -77,8 +76,6 @@ class LoggingOperation
 
     private function getResult($response): string
     {
-        dd(67);
-
         if ($response instanceof Response) {
             if ($response->isSuccessful()) {
                 return '成功';
@@ -86,17 +83,7 @@ class LoggingOperation
             if ($response->isServerError()) {
                 return 'サーバーエラー';
             }
-            return match ($response->getStatusCode()) {
-                Response::HTTP_BAD_REQUEST => '失敗',
-                Response::HTTP_UNAUTHORIZED => '失敗（認証エラー OR セッションタイムアウト）',
-                Response::HTTP_FORBIDDEN => '失敗（許可されていない操作）',
-                Response::HTTP_NOT_FOUND => '失敗（存在しないリソースの操作）',
-                Response::HTTP_CONFLICT => '失敗（衝突）',
-                Response::HTTP_GONE => '失敗（処理済）',
-                Response::HTTP_UNPROCESSABLE_ENTITY => '失敗（バリデーションエラー）',
-                default => '失敗（詳細不明）',
-            };
+            return 'Unknown';
         }
-        return 'Unknown';
     }
 }

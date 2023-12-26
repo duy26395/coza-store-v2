@@ -20,14 +20,6 @@ class MemberEloquentUserProvider extends EloquentUserProvider implements UserPro
      */
     public function validateCredentials(UserContract $user, array $credentials)
     {
-        // dump($credentials);
-
-        // if (Carbon::now() <= $user->temporary_password_period) {
-
-        //     $plain = $credentials['password'];
-
-        //     if ($this->hasher->check($plain, $user->temporary_password)) return true;
-        // }
         return parent::validateCredentials($user, $credentials);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Resources\Products\ProductsCollection;
 use App\Http\Resources\Products\ProductsResource;
 use App\Repository\ProductsRepository;
 use App\Services\ProductService;
+use App\Http\Requests\Products\CreateRequest;
 
 class ProductsController extends Controller
 {
@@ -25,11 +26,11 @@ class ProductsController extends Controller
         return new ProductsCollection($res);
     }
 
-    // public function create(TrainsCreateRequest $request)
-    // {
-    //     $res = $this->productService->insertData($request);
-    //     return new DataResource($res);
-    // }
+    public function create(CreateRequest $request)
+    {
+        $res = $this->productService->insertData($request);
+        return new ProductsResource($res);
+    }
 
     public function show($id)
     {

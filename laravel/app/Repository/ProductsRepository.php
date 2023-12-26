@@ -29,9 +29,17 @@ class ProductsRepository extends BaseRepository implements ProductsInterface
         return $this->model->paginate($this->model::PER_PAGE);
     }
 
-    public function insert_data($name, $time_start)
+    public function insert_data($product_company, $product_name, $description, $price, $quantity, $product_img, $category_id)
     {
-        return $this->model::create(['name' => $name, 'time_start' => $time_start]);
+        return $this->model::create([
+            'product_company' => $product_company,
+            'product_name' => $product_name,
+            'description' => $description,
+            'price' => $price,
+            'quantity' => $quantity,
+            'product_img' => $product_img,
+            'category_id' => $category_id,
+        ]);
     }
 
     public function find_by_id($id)

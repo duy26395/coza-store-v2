@@ -17,7 +17,6 @@ class AdministratorsEloquentUserProvider extends EloquentUserProvider implements
      */
     public function validateCredentials(UserContract $user, array $credentials)
     {
-        dump($user);
-       return true;
+        return parent::validateCredentials($user, $credentials);
     }
 }

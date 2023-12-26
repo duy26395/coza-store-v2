@@ -68,17 +68,12 @@ class User extends Authenticatable
         return null;
     }
 
-    public static function AuthStaff(): ?Staff
+    public static function AuthAdmin(): ?User
     {
-        $staff = Auth::guard('staffs')->user();
-        if ($staff instanceof Staff) {
-            return $staff;
+        $admin = Auth::guard('administrators')->user();
+        if ($admin instanceof User) {
+            return $admin;
         }
         return null;
-    }
-
-    public function staff(): HasOne
-    {
-        return $this->hasOne(Staff::class);
     }
 }
