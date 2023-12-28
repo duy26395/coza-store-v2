@@ -30,6 +30,7 @@ class CreateRequest extends FormRequest
             'price' => ['required', 'numeric'],
             'quantity' => ['required', 'numeric'],
             'category_id' => ['required', 'numeric'],
+            'product_img' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:10240'],
         ];
     }
 

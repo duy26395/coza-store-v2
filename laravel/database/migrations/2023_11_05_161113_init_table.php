@@ -47,6 +47,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->nullable(false);
             $table->string('name', 255)->nullable(false);
+            $table->string('uuid')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -95,7 +96,6 @@ return new class extends Migration
             $table->string('description', 255)->nullable();
             $table->integer('price')->nullable(false);
             $table->integer('quantity')->nullable(false);
-            $table->string('product_img', 255)->nullable(false);
             $table->foreignId('category_id')->nullable(false);
             $table->timestamps();
             $table->softDeletes();

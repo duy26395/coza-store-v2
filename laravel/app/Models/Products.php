@@ -32,7 +32,6 @@ class Products extends Model
         'description',
         'price',
         'quantity',
-        'product_img',
         'category_id'
     ];
 

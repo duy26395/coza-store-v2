@@ -4,6 +4,9 @@ namespace App\Services;
 
 use App\Repository\ProductsRepository;
 use App\Repository\ProductsInterface;
+use Exception;
+use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Uuid;
 
 class ProductService
 {
@@ -27,9 +30,21 @@ class ProductService
         $price = (int) $request->price;
         $quantity = (int) $request->quantity;
         $product_img = $request->product_img;
+
+        $img_name = $request->product_img->getClientOriginalName();
+        $img_extension = $request->product_img->getClientOriginalExtension();
+        $img_content =  $request->product_img->get();
+        $uuid = Uuid::uuid4();
+        $path = $uuid . '.' . $img_extension;
+        try {
+            $res = Storage::disk('s3')->put($path, $img_content);
+        } catch (Exception $th) {
+            throw new $th;
+        }
+
         $category_id = (int) $request->category_id;
 
-        return $this->productRepository->insert_data($product_company, $product_name, $description, $price, $quantity, $product_img, $category_id);
+        return $this->productRepository->insert_data($product_company, $product_name, $description, $price, $quantity, $category_id);
     }
 
     public function findById($id)

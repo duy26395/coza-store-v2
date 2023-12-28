@@ -29,7 +29,7 @@ class ProductsRepository extends BaseRepository implements ProductsInterface
         return $this->model->paginate($this->model::PER_PAGE);
     }
 
-    public function insert_data($product_company, $product_name, $description, $price, $quantity, $product_img, $category_id)
+    public function insert_data($product_company, $product_name, $description, $price, $quantity, $category_id)
     {
         return $this->model::create([
             'product_company' => $product_company,
@@ -37,7 +37,6 @@ class ProductsRepository extends BaseRepository implements ProductsInterface
             'description' => $description,
             'price' => $price,
             'quantity' => $quantity,
-            'product_img' => $product_img,
             'category_id' => $category_id,
         ]);
     }

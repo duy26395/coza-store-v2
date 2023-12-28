@@ -20,12 +20,12 @@ class Img_product_detail extends Model
 
     protected $fillable = [
         'product_id',
-        'name'
+        'name',
+        'uuid'
     ];
 
     protected $dates = [
         'created_at',
         'updated_at',
     ];
-
 }

@@ -29,12 +29,14 @@ class ProductsController extends Controller
     public function create(CreateRequest $request)
     {
         $res = $this->productService->insertData($request);
+
         return new ProductsResource($res);
     }
 
     public function show($id)
     {
         $res = $this->productService->findById($id);
+
         return new ProductsResource($res);
     }
 
