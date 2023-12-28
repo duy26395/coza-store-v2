@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
+use Illuminate\Contracts\Validation\Validator;
 use App\Models\Category;
 
 class CreateRequest extends FormRequest
@@ -29,7 +29,7 @@ class CreateRequest extends FormRequest
             'description' => ['string', 'max:255'],
             'price' => ['required', 'numeric'],
             'quantity' => ['required', 'numeric'],
-            'category_id' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', 'numeric'],
         ];
     }
 
@@ -42,7 +42,6 @@ class CreateRequest extends FormRequest
                 $validator->errors()->add(
                     'category_id',
                     'Category not found'
-
                 );
             }
         });

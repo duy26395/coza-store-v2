@@ -14,21 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('users/{id}', function ($id) {
-    dd($id);
-});
-
-
-Route::controller('App\Http\Controllers\Member\LoginController')->prefix('/members')->group(function () {
+Route::controller('App\Http\Controllers\MemberController')->prefix('/members')->group(function () {
     Route::post('/login', 'LoginAction');
     Route::post('/logout', 'LogoutAction');
 });
 
-Route::controller('App\Http\Controllers\Admin\LoginController')->prefix('/admin')->group(function () {
+Route::controller('App\Http\Controllers\AdminController')->prefix('/admin')->group(function () {
     Route::post('/login', 'LoginAction');
     Route::post('/logout', 'LogoutAction');
 });
@@ -36,9 +27,9 @@ Route::controller('App\Http\Controllers\Admin\LoginController')->prefix('/admin'
 
 Route::controller('App\Http\Controllers\ProductsController')->prefix('/products')->group(function () {
     Route::get('/', 'index');
+    Route::get('/{products}', 'show')->whereNumber('products');
 
     Route::middleware(['auth:administrators'])->group(function () {
-        Route::get('/{products}', 'show')->whereNumber('products');
         Route::post('/', 'create');
         Route::put('/{products}', 'update')->whereNumber('products');
         Route::delete('/{products}', 'destroy')->whereNumber('products');

@@ -26,6 +26,16 @@ class Products extends Model
 
     protected $table = 'products';
 
+    protected $fillable = [
+        'product_company',
+        'product_name',
+        'description',
+        'price',
+        'quantity',
+        'product_img',
+        'category_id'
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',

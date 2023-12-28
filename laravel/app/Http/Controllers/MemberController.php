@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Member;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ResCollection;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +9,7 @@ use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Response;
 
-class LoginController extends Controller
+class MemberController extends Controller
 {
     public function LoginAction(Request $request)
     {

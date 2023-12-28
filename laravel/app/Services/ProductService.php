@@ -21,7 +21,15 @@ class ProductService
 
     public function insertData($request)
     {
-        return $this->productRepository->insert_data($request->product_company, $request->product_name, $request->description, $request->price, $request->quantity, $request->product_img, $request->category_id);
+        $product_company = $request->product_company;
+        $product_name = $request->product_name;
+        $description = $request->description;
+        $price = (int) $request->price;
+        $quantity = (int) $request->quantity;
+        $product_img = $request->product_img;
+        $category_id = (int) $request->category_id;
+
+        return $this->productRepository->insert_data($product_company, $product_name, $description, $price, $quantity, $product_img, $category_id);
     }
 
     public function findById($id)
