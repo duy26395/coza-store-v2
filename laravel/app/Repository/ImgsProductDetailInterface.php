@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-interface ProductsInterface
+interface ImgsProductDetailInterface
 {
     public function get_all();
     public function insert_data(array $command);

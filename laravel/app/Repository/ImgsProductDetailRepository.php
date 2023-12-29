@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
-use App\Repository\ProductsInterface;
+use App\Repository\ImgsProductDetailInterface;
 use App\Repository\BaseRepository;
-use App\Models\Products;
+use App\Models\Img_product_detail;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-class ProductsRepository extends BaseRepository implements ProductsInterface
+class ImgsProductDetailRepository extends BaseRepository implements ImgsProductDetailInterface
 {
     protected $model;
 
@@ -16,9 +16,9 @@ class ProductsRepository extends BaseRepository implements ProductsInterface
      *
      * @param Products $products
      */
-    public function __construct(Products $products)
+    public function __construct(Img_product_detail $img_product_detail)
     {
-        parent::__construct($products);
+        parent::__construct($img_product_detail);
     }
 
     /**
@@ -32,12 +32,9 @@ class ProductsRepository extends BaseRepository implements ProductsInterface
     public function insert_data($command)
     {
         return $this->model::create([
-            'product_company' => $command['product_company'],
-            'product_name' => $command['product_name'],
-            'description' => $command['description'],
-            'price' => $command['price'],
-            'quantity' => $command['quantity'],
-            'category_id' => $command['category_id'],
+            'product_id' => $command['product_id'],
+            'name' => $command['name'],
+            'uuid' => $command['uuid']
         ]);
     }
 

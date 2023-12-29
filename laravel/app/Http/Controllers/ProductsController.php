@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Products\ProductsCollection;
 use App\Http\Resources\Products\ProductsResource;
 use App\Repository\ProductsRepository;
+use App\Repository\ImgsProductDetailRepository;
 use App\Services\ProductService;
 use App\Http\Requests\Products\CreateRequest;
 
@@ -13,9 +14,9 @@ class ProductsController extends Controller
     protected $product;
     protected $productService;
 
-    public function __construct(ProductsRepository $productsRepository)
+    public function __construct(ProductsRepository $productsRepository, ImgsProductDetailRepository $imgsProductDetailRepository)
     {
-        $this->productService = new ProductService($productsRepository);
+        $this->productService = new ProductService($productsRepository, $imgsProductDetailRepository);
     }
 
 

@@ -3,18 +3,19 @@
 namespace App\Services;
 
 use App\Repository\ProductsRepository;
-use App\Repository\ProductsInterface;
-use Exception;
+use App\Repository\ImgsProductDetailRepository;
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
 class ProductService
 {
     protected $productRepository;
+    protected $imgsProductsRepository;
 
-    public function __construct(ProductsRepository $productsRepository)
+    public function __construct(ProductsRepository $productsRepository, ImgsProductDetailRepository $imgsProductsRepository)
     {
         $this->productRepository = $productsRepository;
+        $this->imgsProductsRepository = $imgsProductsRepository;
     }
 
     public function getAllData()
@@ -29,22 +30,32 @@ class ProductService
         $description = $request->description;
         $price = (int) $request->price;
         $quantity = (int) $request->quantity;
-        $product_img = $request->product_img;
 
         $img_name = $request->product_img->getClientOriginalName();
         $img_extension = $request->product_img->getClientOriginalExtension();
         $img_content =  $request->product_img->get();
         $uuid = Uuid::uuid4();
-        $path = $uuid . '.' . $img_extension;
-        try {
-            $res = Storage::disk('s3')->put($path, $img_content);
-        } catch (Exception $th) {
-            throw new $th;
-        }
-
         $category_id = (int) $request->category_id;
+        $command  = [
+            'product_company' => $product_company,
+            'product_name' => $product_name,
+            'description' => $description,
+            'price' => $price * 1000,
+            'quantity' => $quantity,
+            'category_id' => $category_id,
+        ];
 
-        return $this->productRepository->insert_data($product_company, $product_name, $description, $price, $quantity, $category_id);
+        $product = $this->productRepository->insert_data($command);
+
+        $this->imgsProductsRepository->insert_data([
+            'product_id' => $product->id,
+            'name' => $img_name,
+            'uuid' => $uuid
+        ]);
+
+        Storage::disk('s3')->put($uuid . '.' . $img_extension, $img_content);
+
+        return $product;
     }
 
     public function findById($id)
