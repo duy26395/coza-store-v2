@@ -36,19 +36,21 @@ services:
     tty: true
 
   minio_coza_store:
-    image: minio/minio
+    image: minio/minio:latest
     container_name: minio_coza_store
     volumes:
-      - ./docker/minio/data:/data
+      - minio:/data
+      - ./docker/minio/export:/export
       - ./docker/minio/policies:/policies
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=ahihi123
     ports:
-      - 9000:9000
-      - 9001:9001
+      - 9009:9000
+      - 9999:9999
     entrypoint: sh
-    command: -c "\ mkdir -p /data/.minio.sys/buckets && \ cp -r /policies/* /data/.minio.sys/ && \ /usr/bin/minio server /data --console-address \":9001\""
+    command: -c " mkdir -p /data/.minio.sys/buckets; cp -r /policies/* /data/.minio.sys/; cp -r /export/* /data/; /usr/bin/minio server /data --console-address ":9999"; "
 volumes:
   pgdata:
     driver: local
+  minio:
