@@ -46,20 +46,15 @@ class ProductsRepository extends BaseRepository implements ProductsInterface
         return $this->model::find($id);
     }
 
-    public function update_by_id($id, $name, $time_start)
+    public function update_by_id($id, $command)
     {
-        $modelTrains = $this->model::find($id);
+        $modelProduct = $this->model::find($id);
 
-        if (isset($name)) {
-            $modelTrains->name = $name;
-        }
 
-        if (isset($time_start)) {
-            $modelTrains->time_start = $time_start;
-        }
+        $modelProduct->update($command);
+        $modelProduct->save();
 
-        $modelTrains->save();
-        return $modelTrains;
+        return $modelProduct;
     }
 
     public function delete_by_id($id)

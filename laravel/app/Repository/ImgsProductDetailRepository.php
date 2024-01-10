@@ -31,11 +31,7 @@ class ImgsProductDetailRepository extends BaseRepository implements ImgsProductD
 
     public function insert_data($command)
     {
-        return $this->model::create([
-            'product_id' => $command['product_id'],
-            'name' => $command['name'],
-            'uuid' => $command['uuid']
-        ]);
+        return $this->model::create($command);
     }
 
     public function find_by_id($id)
@@ -43,7 +39,7 @@ class ImgsProductDetailRepository extends BaseRepository implements ImgsProductD
         return $this->model::find($id);
     }
 
-    public function update_by_id($id, $name, $time_start)
+    public function update_by_id($id, $command)
     {
         $modelTrains = $this->model::find($id);
 
